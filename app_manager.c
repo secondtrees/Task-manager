@@ -1,10 +1,7 @@
 #include "app_manager.h"
 
-/*------------------------ task Init ------------------------*/
-App_Task task_list[] =
-{
-    {TASK_SUSPEND, 10, 10, key_scan_task,Keys_init}
-};
+/*------------------------ task list ------------------------*/
+extern App_Task task_list[];
 
 // 获取当前任务列表的长度
 uint8_t Get_AppList_Length(void)
