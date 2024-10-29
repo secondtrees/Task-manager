@@ -50,11 +50,16 @@ typedef enum{
 }Task_States;
 /*---------------------- task struct ------------------------*/
 typedef struct{
+    //初始化函数
     App_Body_Point task_init;
+    //任务状态
     Task_States task_states;
+    //延时计数(开始时 == 任务延时)
     uint16_t task_count;
+    //任务延时
     uint16_t task_delay;
-    App_Body_Point task_callback;
+    //任务需要的函数体
+    App_Body_Point app_task;
 }App_Task;
 extern App_Task task_list[];
 
