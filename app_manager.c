@@ -4,17 +4,17 @@
 extern App_Task task_list[];
 
 // 获取当前任务列表的长度
-uint8_t Get_AppList_Length(void)
+unsigned char ucGet_AppList_Length(void)
 {
     return sizeof(task_list)/sizeof(App_Task);
 }
 
 //根据任务名称获取任务索引
-uint8_t Get_AppIndex_ByName(App_Body_Point name)
+unsigned char ucGet_AppIndex_ByName(App_Body_Point name)
 {
-    uint8_t i = 0;
+    unsigned char i = 0;
     //获取任务列表长度
-    uint8_t list_len = Get_AppList_Length();
+    unsigned char list_len = ucGet_AppList_Length();
 
     for (i = 0; i < list_len; i++)
     {
@@ -27,11 +27,11 @@ uint8_t Get_AppIndex_ByName(App_Body_Point name)
 }
 
 // 根据任务索引获取任务名称
-App_Body_Point Get_AppName_ByIndex(uint8_t index)
+App_Body_Point fpGet_AppName_ByIndex(unsigned char index)
 {
-    uint8_t i = 0;
+    unsigned char i = 0;
     //获取任务列表长度
-    uint8_t list_len = Get_AppList_Length();
+    unsigned char list_len = ucGet_AppList_Length();
 
     for (i = 0;i < list_len;i++)
     {
@@ -44,11 +44,11 @@ App_Body_Point Get_AppName_ByIndex(uint8_t index)
 }
 
 // 函数状态更新
-void App_Change_To_Ready(void)
+void vApp_Change_To_Ready(void)
 {
-    uint8_t i = 0;
+    unsigned char i = 0;
     //获取任务列表长度
-    uint8_t list_len = Get_AppList_Length();
+    unsigned char list_len = ucGet_AppList_Length();
 
     for (i = 0; i < list_len; i++)
     {
@@ -62,11 +62,11 @@ void App_Change_To_Ready(void)
 }
 
 // 任务管理器
-void App_Manager_Control(void)
+void vApp_Manager_Control(void)
 {
-    uint8_t i = 0;
+    unsigned char i = 0;
     //获取任务列表长度
-    uint8_t list_len = Get_AppList_Length();
+    unsigned char list_len = ucGet_AppList_Length();
     
     for (i = 0; i < list_len; i++)
     {
@@ -74,7 +74,7 @@ void App_Manager_Control(void)
         if (task_list[i].task_states == TASK_READY)
         {
             //任务状态变更
-            task_list[i].task_states == TASK_RUNNING;
+            task_list[i].task_states = TASK_RUNNING;
             //执行任务
             task_list[i].app_task();
             //任务延时重载
@@ -86,11 +86,11 @@ void App_Manager_Control(void)
 }
 
 // 任务初始化
-void App_Manager_Init(void)
+void vApp_Manager_Init(void)
 {
-    uint8_t i = 0;
+    unsigned char i = 0;
     //获取任务列表长度
-    uint8_t list_len = Get_AppList_Length();
+    unsigned char list_len = ucGet_AppList_Length();
     
     for (i = 0; i < list_len; i++)
     {
@@ -102,11 +102,11 @@ void App_Manager_Init(void)
 }
 
 //任务延时计数器
-void Task_Delay_Update(void)
+void vTask_Delay_Update(void)
 {
-    uint8_t i;
+    unsigned char i;
     //获取任务列表长度
-    uint8_t list_len = Get_AppList_Length();
+    unsigned char list_len = ucGet_AppList_Length();
 
     for (i = 0; i < list_len; i++)
     {
@@ -116,7 +116,7 @@ void Task_Delay_Update(void)
             //任务延时计数器减1
             task_list[i].task_count--;
             //更新任务状态
-            App_Change_To_Ready();
+            vApp_Change_To_Ready();
         }
     }
 }
