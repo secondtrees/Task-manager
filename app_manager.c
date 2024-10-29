@@ -44,7 +44,7 @@ App_Body_Point Get_AppName_ByIndex(uint8_t index)
 }
 
 // 函数状态更新
-void App_Change_To_Running(void)
+void App_Change_To_Ready(void)
 {
     uint8_t i = 0;
     //获取任务列表长度
@@ -70,6 +70,7 @@ void App_Manager_Control(void)
     
     for (i = 0; i < list_len; i++)
     {
+        //如果任务是就绪状态
         if (task_list[i].task_states == TASK_READY)
         {
             //任务状态变更
@@ -88,7 +89,9 @@ void App_Manager_Control(void)
 void App_Manager_Init(void)
 {
     uint8_t i = 0;
+    //获取任务列表长度
     uint8_t list_len = Get_AppList_Length();
+    
     for (i = 0; i < list_len; i++)
     {
         if (task_list[i].task_init != NULL)
@@ -102,7 +105,9 @@ void App_Manager_Init(void)
 void Task_Delay_Update(void)
 {
     uint8_t i;
+    //获取任务列表长度
     uint8_t list_len = Get_AppList_Length();
+
     for (i = 0; i < list_len; i++)
     {
         //如果任务是挂起状态
@@ -111,7 +116,7 @@ void Task_Delay_Update(void)
             //任务延时计数器减1
             task_list[i].task_count--;
             //更新任务状态
-            App_Change_To_Running();
+            App_Change_To_Ready();
         }
     }
 }

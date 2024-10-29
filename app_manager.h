@@ -22,7 +22,7 @@ typedef void (*App_Body_Point)(void);
 /**
  * @brief 任务延时计数器
  * @note 需要放在定时器中断中调用
- * @note 每次调用所有挂起的任务的延时计数减1
+ * @note 每次调用所有挂起的任务的延时计数减1，并将计数器为零的任务状态更改为就绪
  * */
 void Task_Delay_Update(void);
 
@@ -48,14 +48,14 @@ uint8_t Get_AppList_Length(void);
 
 /**
  * @brief 函数状态更新
- * @note 该函数再主循环调用，当延时计数为零时，自动更改任务状态为运行
- * @note 但是该函数并不能运行任务，需要调用(App_Manager_Control)函数
+ * @note 该函数再主循环调用，当延时计数为零时，自动更改任务状态为就绪
+ * @note 但是该函数并不能运行任务，需要在这之后调用(App_Manager_Control)函数
  */
-void App_Change_To_Running(void);
+void App_Change_To_Ready(void);
 
 /**
  * @brief 任务管理器控制函数
- * @note 该函数在主循环中调用，运行所有运行状态的函数
+ * @note 该函数在主循环中调用，运行所有就绪状态的函数，同时更改状态
  * @note 运行完任务后，会自动重载延时计数器，同时将状态更改为挂起
  */
 void App_Manager_Control(void);
