@@ -1,22 +1,34 @@
 #ifndef __APP_MANAGER_H__
 #define __APP_MANAGER_H__
 
-#include "app.h"
 #include "string.h"
 
+/* 变量类型定义 */
+#ifndef uint8_t
+#define uint8_t unsigned char
+#endif
+
+#ifndef uint16_t
+#define uint16_t unsigned short
+#endif
+
+#ifndef uint32_t
+#define uint32_t unsigned long
+#endif
+
 //函数指针
-typedef void (*App_Process)(void);
+typedef void (*App_Body_Point)(void);
 
 //任务延时计数器
 void Task_Delay_Update(void);
 //根据任务名称获取任务索引
-uint8_t Get_AppIndex_ByName(App_Callback name);
+uint8_t Get_AppIndex_ByName(App_Body_Point name);
 // 获取当前任务列表的长度
 uint8_t Get_AppList_Length(void);
 // 根据任务索引获取任务名称
-App_Process Get_AppName_ByIndex(uint8_t index);
+App_Body_Point Get_AppName_ByIndex(uint8_t index);
 //根据任务名称获取任务索引
-uint8_t Get_AppIndex_ByName(App_Callback name);
+uint8_t Get_AppIndex_ByName(App_Body_Point name);
 // 函数状态更新
 void App_Change_To_Running(void);
 // 任务管理器
@@ -38,11 +50,11 @@ typedef enum{
 }Task_States;
 /*---------------------- task struct ------------------------*/
 typedef struct{
-    App_Process task_init;
+    App_Body_Point task_init;
     Task_States task_states;
     uint16_t task_count;
     uint16_t task_delay;
-    App_Process task_callback;
+    App_Body_Point task_callback;
 }App_Task;
 extern App_Task task_list[];
 

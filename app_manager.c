@@ -10,7 +10,7 @@ uint8_t Get_AppList_Length(void)
 }
 
 //根据任务名称获取任务索引
-uint8_t Get_AppIndex_ByName(App_Callback name)
+uint8_t Get_AppIndex_ByName(App_Body_Point name)
 {
     uint8_t list_len = Get_AppList_Length();
     for (uint16_t i = 0; i < list_len; i++)
@@ -24,7 +24,7 @@ uint8_t Get_AppIndex_ByName(App_Callback name)
 }
 
 // 根据任务索引获取任务名称
-App_Process Get_AppName_ByIndex(uint8_t index)
+App_Body_Point Get_AppName_ByIndex(uint8_t index)
 {
     for (uint8_t i = 0;i < Get_AppList_Length();i++)
     {
